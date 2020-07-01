@@ -15,11 +15,6 @@ server.on('request', (req, res) => {
 
     switch (req.method) {
       case 'POST':
-        /* setTimeout(() => {
-          res.close();
-          console.log('destroy');
-        }, 0);*/
-
         if (pathname.indexOf('/') !== -1) {
           res.statusCode = 400;
           res.end('Inner folders are not supported!');
@@ -52,7 +47,6 @@ server.on('request', (req, res) => {
           }
           res.end(err.message);
         }).on('finish', () => {
-          console.log('201');
           res.statusCode = 201;
           res.end('done');
         });
