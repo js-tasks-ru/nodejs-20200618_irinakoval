@@ -20,7 +20,6 @@ server.on('request', (req, res) => {
         }
         const readStream = fs.createReadStream(filepath);
         readStream.on('open', function() {
-          // This just pipes the read stream to the response object (which goes to the client)
           readStream.pipe(res);
         });
         readStream.on('error', function(err) {
