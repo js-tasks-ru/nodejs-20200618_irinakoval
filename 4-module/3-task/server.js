@@ -1,6 +1,7 @@
 const url = require('url');
 const http = require('http');
 const path = require('path');
+const fs = require('fs');
 
 const server = new http.Server();
 
@@ -11,7 +12,26 @@ server.on('request', (req, res) => {
 
   switch (req.method) {
     case 'DELETE':
+      try {
+        if (pathname.indexOf('/') !== -1) {
+          res.statusCode = 400;
+          res.end('Inner folders are not supported!');
+          return;
+        }
 
+        fs.unlink(filepath, (err) => {
+          if (err) {
+            res.statusCode = 404;
+            res.end('not found');
+            return;
+          }
+          res.statusCode = 200;
+          res.end('done');
+        });
+      } catch (e) {
+        res.statusCode = 500;
+        res.end(e.message);
+      }
       break;
 
     default:
