@@ -23,6 +23,7 @@ server.on('request', (req, res) => {
           if (err) {
             res.statusCode = 404;
             res.end('not found');
+            return;
           }
           res.statusCode = 200;
           res.end('done');
