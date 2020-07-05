@@ -6,7 +6,7 @@ app.use(require('koa-static')(path.join(__dirname+ '/public')));
 app.use(require('koa-bodyparser')());
 
 
-const Router = require('@koa/router');
+const Router = require('koa-router');
 const router = new Router();
 const resolves = [];
 
@@ -28,6 +28,6 @@ router.post('/publish', async (ctx, next) => {
   }
 });
 
-app.use(router.middleware());
+app.use(router.routes());
 
 module.exports = app;
