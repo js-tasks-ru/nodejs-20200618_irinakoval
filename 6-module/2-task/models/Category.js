@@ -17,4 +17,20 @@ const categorySchema = new mongoose.Schema({
   subcategories: [subCategorySchema],
 });
 
+categorySchema.statics.gelAll = async function() {
+  const categories = await this.find({});
+  return categories.map((cat) => {
+    return {
+      id: cat._id,
+      title: cat.title,
+      subcategories: cat.subcategories.map((sub) => {
+        return {
+          id: sub._id,
+          title: sub.title,
+        };
+      }),
+    };
+  });
+};
+
 module.exports = connection.model('Category', categorySchema);
