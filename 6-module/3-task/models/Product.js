@@ -32,4 +32,15 @@ const productSchema = new mongoose.Schema({
 
 });
 
+
+productSchema.index({title: 'text', description: 'text'}, {
+  name: 'TextSearchIndex',
+  default_language: 'russian',
+  weights: {title: 10, description: 5},
+});
+
+productSchema.statics.getProductsByQuery = async function(query) {
+  return await this.find({$text: {$search: query}});
+};
+
 module.exports = connection.model('Product', productSchema);
