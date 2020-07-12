@@ -10,7 +10,7 @@ const users = require('../../../__data/users');
     await u.setPassword(user.password);
     await u.save();
   }
-  
+
   connection.close();
   console.log(`All done, ${users.users.length} users have been saved in DB`);
 })();
