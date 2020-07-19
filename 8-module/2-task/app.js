@@ -77,7 +77,7 @@ router.post('/register', handleMongooseValidationError, register);
 router.post('/confirm', confirm);
 
 router.get('/orders', getOrdersList);
-router.post('/orders', checkout);
+router.post('/orders', handleMongooseValidationError, checkout);
 
 app.use(router.routes());
 
